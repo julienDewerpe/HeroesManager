@@ -18,13 +18,13 @@
 
 						
 						<div data-validate = "Username is required">
-							<input class="input100" type="text" name="username" placeholder="Username">
+							<input id="login" class="input100" type="text" name="username" placeholder="Username">
 							<span class="focus-input100"></span>
 						</div>
 						
 						
 						<div data-validate = "Password is required">
-							<input type="password" name="pass" placeholder="Password">
+							<input id="pwd" type="password" name="pass" placeholder="Password">
 							<span></span>
 						</div>
 						
@@ -44,9 +44,13 @@
 						</div>
 
 						<div>
-							<button>
+							<button onclick="connexion()">
 								Login
 							</button>
+							<script>
+								var login = document.getElementById("login");
+								var pwd = document.getElementById("pwd");
+							</script>
 						</div>
 
 					</form>
