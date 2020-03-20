@@ -44,12 +44,16 @@
 						</div>
 
 						<div>
-							<button onclick="connexion()">
+							<button onclick="myFunction()">
 								Login
 							</button>
 							<script>
-								var login = document.getElementById("login");
-								var pwd = document.getElementById("pwd");
+								function myFunction() {
+									let username = document.getElementById("login");
+									let password = document.getElementById("pwd");
+									alert(username.value);
+									alert(password.value);
+								}
 							</script>
 						</div>
 
@@ -58,8 +62,6 @@
 			</div>
 		</div>
 		
-
-		<div id="dropDownSelect1"></div>
 
 	</body>
 </html>
