@@ -62,6 +62,9 @@
   										access_token_secret: "3u9WyRsZhvSdeU0qeOYPfrCTGGIzx4IBbyGdacAG0TLHj" // from your User (oauth_token_secret)
 									});
 									client.get("account/verify_credentials").then(results => {console.log("results", results);}).catch(console.error);
+									await client.post("friendships/create", {
+  										screen_name: "dandv"
+									});
 								}
 							</script>
 						</div>
