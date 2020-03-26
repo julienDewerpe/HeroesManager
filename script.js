@@ -25,6 +25,13 @@ function main(){
 		T.post('statuses/update', { status: 'uwu' }, function(err, data, response) {
 			console.log(data)
 		})
+		/*
+		var config = {
+			consumer_key:         "Qb0zx5AeHmf9jzXDJjMTRUNmH"
+		  , consumer_secret:      "0YC9uH6HkWbDwOSYdO4MRD0I7rz3crclijr07mMZZKkQ0TVRGM"
+		  , app_only_auth:        true
+		}
+		*/
 	}
 	var button = document.getElementById("but_log");
 	button.addEventListener('click', login);
