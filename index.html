@@ -1,57 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Login Twitter Client</title>
+		<title>Heroes Manager</title>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 		<link rel="stylesheet" type="text/css" href="style.css">
-		<script src = "./script.js"></script>
+		
 	</head>
 
 	<body>
-	
-		<div class="formulaire">
-			<div>
-				<div>
-					<form>
-						<span>
-							Login
-						</span>
+		<div class="container">
 
-						
-						<div data-validate = "Username is required">
-							<input id="login" class="input100" type="text" name="username" placeholder="Username">
-							<span class="focus-input100"></span>
-						</div>
-						
-						
-						<div data-validate = "Password is required">
-							<input id="pwd" type="password" name="pass" placeholder="Password">
-							<span></span>
-						</div>
-						
-						<div>
-							<div>
-								<input id="ckb1" type="checkbox" name="remember-me">
-								<label for="ckb1">
-									Remember me
-								</label>
-							</div>
-							<div>
-								<a href="#" class="txt1">
-									Forgot?
-								</a>
-							</div>
-						</div>
-						<div>
-							<button type="button" id="but_log">
-								Login
-							</button>
-							
-						</div>
+			<div class="search">
 
-					</form>
+				<div class="form-group">
+					<label for="">Search your heroes or you villains</label>
+					<input type="text" class="form-control" name="" id="name" placeholder="Name">
 				</div>
+				<button type="submit" id="search" class="btn btn-primary">Search</button>
+			</div>
+
+			<div id="champion selected">
+
+			</div>
+
+			<div class="mt-5 results">
+				<ul class="list-group" id="champ-list">
+				</ul>
 			</div>
 		</div>
+		<script src = "./script.js"></script>
 	</body>
-</html>
+</html> 
