@@ -1,0 +1,16 @@
+body
+{
+	height: 100%;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formulaire
+{
+	margin-top: 10%;
+}
+
+
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */

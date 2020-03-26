@@ -1,0 +1,1 @@
+{"version":3,"sources":["style.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"style.e308ff8e.css","sourceRoot":"..","sourcesContent":["body\r\n{\r\n\theight: 100%;\r\n\tdisplay: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n}\r\n\r\n.formulaire\r\n{\r\n\tmargin-top: 10%;\r\n}\r\n\r\n"]}
