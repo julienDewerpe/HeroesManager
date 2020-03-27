@@ -9,26 +9,40 @@
 		
 	</head>
 
-	<body>
-		<div class="container">
-
+	<body class="bg-dark">
+		<div class="container p-3 mb-2 text-white">
+			<h1 class="text-center mb-5 mt-4">Heroes Manager</h1>
 			<div class="search">
-
 				<div class="form-group">
-					<label for="">Search your heroes or you villains</label>
-					<input type="text" class="form-control" name="" id="name" placeholder="Name">
+					<label for="">Search your heroes or your villains</label>
+					<input type="text" class="form-control " name="" id="name" placeholder="Name">
 				</div>
-				<button type="submit" id="search" class="btn btn-primary">Search</button>
+				<button type="submit" id="search" class="btn btn-success">Search</button>
 			</div>
 
-			<div id="champion selected">
+			<div class="row text-center mt-3" id="champion selected">
+				<div class="col-6" id="p1">
+					<h3>Player 1 selection list</h3>
+					<ul id="list-p1">
 
+					</ul>
+				</div>
+				<div class="col-6" id="p2">
+					<h3>Player 2 selection list</h3>
+					<ul id="list-p2">
+
+					</ul>
+				</div>
 			</div>
 
-			<div class="mt-5 results">
-				<ul class="list-group" id="champ-list">
+			<h5 id="player-active" data-id="1" class="text-center mt-2">Player 1 select a champion</h5>
+
+			<div class="mt-5 mb-3 results">
+				<ul class="list-group text-dark" id="champ-list">
+
 				</ul>
 			</div>
+
 		</div>
 		<script src = "./script.js"></script>
 	</body>

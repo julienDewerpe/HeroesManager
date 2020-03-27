@@ -120,6 +120,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"script.js":[function(require,module,exports) {
 function research(name) {
   //todo : use fetch 
+  //todo : systeme de cache dans localstorage
   var Http = new XMLHttpRequest();
   var corsURL = "https://cors-anywhere.herokuapp.com/";
   var url = 'https://superheroapi.com/api/2463499803965064/search/' + name; //with the access token of Antoine
@@ -153,12 +154,41 @@ function addChampion(champion) {
   image.src = champion.image.url;
   image.width = "50";
   selectButton.appendChild(document.createTextNode("Select"));
-  selectButton.className = "btn btn-primary float-right";
+  selectButton.className = "btn mt-3 btn-success float-right";
+  selectButton.setAttribute("data-id", champion.id);
+  selectButton.setAttribute("data-champion", champion);
   champElmt.className = "list-group-item";
-  champElmt.appendChild(image);
+  var img = champElmt.appendChild(image);
+  img.className = "mr-3";
   champElmt.appendChild(document.createTextNode(champion.name));
   champElmt.appendChild(selectButton);
   list.appendChild(champElmt);
+  selectButton.addEventListener('click', function () {
+    selectChamp(champion.id);
+  });
+}
+
+function selectChamp(id) {
+  var idJoueur = document.querySelector("#player-active").getAttribute("data-id");
+  var list = document.querySelector('#list-p' + idJoueur);
+  var champElmt = document.createElement("card");
+  var image = document.createElement("img");
+  image.src = champion.image.url;
+  champElmt.innerHTML = '<';
+  list.appendChild(champElmt);
+  changePlayer();
+}
+
+function changePlayer() {
+  var annou = document.getElementById("player-active");
+
+  if (annou.getAttribute("data-id") == 1) {
+    annou.innerHTML = "Player 2 select a champion";
+    annou.setAttribute("data-id", 2);
+  } else {
+    annou.innerHTML = "Player 1 select a champion";
+    annou.setAttribute("data-id", 1);
+  }
 }
 
 var searchButton = document.getElementById("search");
@@ -195,7 +225,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60704" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50773" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
