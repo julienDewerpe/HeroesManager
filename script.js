@@ -1,12 +1,28 @@
 window.addEventListener("DOMContentLoaded", (event) => {
     localStorage.setItem("count_p1", 0);
     localStorage.setItem("count_p2", 0);
+    localStorage.setItem("champ_selected", []);
 });
+//todo : 
+/*
+
+//todo : use fetch 
+
+
+//champ_list_selected set id champ
+// if champ_id in array champ_selected -> btn disabled
+// 
+// algo to determine which team wins
+
+//game mode -> solo, duo
+
+// start fight -> new popup with stats
+
+*/
 
 
 function research(name) {
-    //todo : use fetch 
-    //todo : systeme de cache dans localstorage
+
     const Http = new XMLHttpRequest();
     const corsURL = "https://cors-anywhere.herokuapp.com/";
     const url = 'https://superheroapi.com/api/2463499803965064/search/' + name; //with the access token of Antoine
@@ -23,8 +39,8 @@ function research(name) {
             });
         }
     }
-    var x = document.getElementById("select_music");
-    x.play()
+    //var x = document.getElementById("select_music");
+    //x.play()
 }
 
 function clearChampList() {
@@ -61,29 +77,77 @@ function addChampion(champion) {
 
 function selectChamp(champion) {
 
-    var idJoueur = document.querySelector("#player-active").getAttribute("data-id");
-    var tmp = "count_p" + idJoueur;
+    var idPlayer = document.querySelector("#player-active").getAttribute("data-id");
+    var tmp = "count_p" + idPlayer;
+    console.log(tmp);
     if (localStorage.getItem(tmp) < 3) {
-        var list = document.querySelector('#list-p' + idJoueur);
+        var list = document.querySelector('#list-p' + idPlayer);
         var champElmt = document.createElement("card");
+        champElmt.setAttribute("id", "card" + "_" + idPlayer + "_" + localStorage.getItem(tmp) + 1)
         var image = document.createElement("img");
         image.src = champion.image.url;
         image.width = "100";
         var img = champElmt.appendChild(image);
+        img.setAttribute("data-id", localStorage.getItem(tmp) + 1)
         list.appendChild(champElmt);
+
+        img.addEventListener('click', function (event) {
+            removeChamp(idPlayer, event.target.getAttribute("data-id"));
+        });
+
         changePlayer();
-        localStorage.setItem("count", parseInt(localStorage.getItem("count_p" + idJoueur)) + 1);
+
+        localStorage.setItem(tmp, parseInt(localStorage.getItem(tmp)) + 1);
+        if (localStorage.getItem("count_p1") == 3 && localStorage.getItem("count_p2") == 3) {
+            teamsComplete();
+        }
+    }
+}
+
+
+function teamsComplete(){
+
+    var annou = document.getElementById("player-active");
+    annou.innerHTML = "  ";
+    var startButton = document.querySelector("#fightButton");
+    startButton.style.display = "inline";
+
+   
+    startButton.className = "btn mt-3 btn-danger text_center";
+    //startButton.addEventListener('click', function () {
+    // faire le calcul
+    //});
+
+}
+
+
+function removeChamp(playerId, imageId) {
+    var cardToDel = document.getElementById("card" + "_" + playerId + "_" + imageId);
+    cardToDel.remove();
+    var tmp = "count_p" + playerId;
+    localStorage.setItem(tmp, parseInt(localStorage.getItem(tmp)) - 1);
+    var startButton = document.querySelector("#fightButton");
+    startButton.style.display = "none";
+
+    var annou = document.getElementById("player-active");
+    if (localStorage.getItem("count_p1") < 3 && localStorage.getItem("count_p2") == 3) {
+        annou.innerHTML = "Player 1 select a champion";
+        annou.setAttribute("data-id", 1);
+    }
+    else if (localStorage.getItem("count_p2") < 3 && localStorage.getItem("count_p1") == 3) {
+        annou.innerHTML = "Player 2 select a champion";
+        annou.setAttribute("data-id", 2);
     }
 
 }
 
 function changePlayer() {
     var annou = document.getElementById("player-active");
-    if (annou.getAttribute("data-id") == 1) {
+    if (annou.getAttribute("data-id") == 1 && localStorage.getItem("count_p2") < 3) {
         annou.innerHTML = "Player 2 select a champion";
         annou.setAttribute("data-id", 2);
     }
-    else {
+    else if (localStorage.getItem("count_p1") < 3) {
         annou.innerHTML = "Player 1 select a champion";
         annou.setAttribute("data-id", 1);
     }
