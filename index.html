@@ -4,11 +4,10 @@
 		<title>Heroes Manager</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 		<link rel="stylesheet" type="text/css" href="style.css">
 		
 	</head>
-
+	
 	<body class="bg-dark">
 		<div class="container p-3 mb-2 text-white">
 			<h1 class="text-center mb-5 mt-4">Heroes Manager</h1>
@@ -19,12 +18,12 @@
 				</div>
 				<button type="submit" id="search" class="btn btn-success">Search</button>
 			</div>
-
+			
 			<div class="row text-center mt-3 align-items-center" id="champion selected">
 				<div class="col-5" id="p1">
 					<h3>Player 1 selection list</h3>
 					<ul id="list-p1" class="row justify-content-center">
-
+						
 					</ul>
 				</div>
 				<div class="col-2">
@@ -33,23 +32,64 @@
 				<div class="col-5" id="p2">
 					<h3>Player 2 selection list</h3>
 					<ul id="list-p2" class="row justify-content-center">
-
+						
 					</ul>
 				</div>
 			</div>
-
+			
 			<h5 id="player-active" data-id="1" class="text-center mt-2">Player 1 select a champion</h5>
-
+			
 			<div class="mt-5 mb-3 results">
 				<ul class="list-group text-dark" id="champ-list">
-
+					
 				</ul>
 			</div>
-
+			
 		</div>
+		<!-- Modal fight -->
+		<div class="modal fade" id="fight-modal" >
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Analyse des stats</h5>
+					</div>
+					<div class="modal-body">
+						<div class="container">
+							<h1 class="text-center" id="winner"></h1>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="card" id="card-j1">
+										<div class="card-body">
+											<h5 class="card-title">Joueur 1</h5>
+											<p class="card-text" id="stats-j1"></p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="card" id="card-j2">
+										<div class="card-body">
+											<h5 class="card-title">Joueur 2</h5>
+											<p class="card-text" id="stats-j2"></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<audio id = "select_music">
 			<source src="./music.mp3" type="audio/mpeg">
-		</audio>
-		<script src = "./script.js"></script>
-	</body>
-</html> 
+			</audio>
+			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+			<script src = "./script.js"></script>
+		</body>
+		</html> 

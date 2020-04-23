@@ -26,8 +26,9 @@ function research(name) {
 
     const Http = new XMLHttpRequest();
     const corsURL = "https://cors-anywhere.herokuapp.com/";
-    const url = 'https://superheroapi.com/api/2463499803965064/search/' + name; //with the access token of Antoine
-    var urlReq = corsURL + url;
+    const url = 'https://superheroapi.com/api.php/2463499803965064/search/' + name; //with the access token of Antoine
+    //var urlReq = corsURL + url;
+    var urlReq =  url;
     Http.open("GET", urlReq);
     Http.send();
     Http.onreadystatechange = (e) => {
@@ -102,6 +103,15 @@ function addChampInPlayerList(count_p, champion, idPlayer) {
     var champElmt = document.createElement("card");
     champElmt.setAttribute("id", "card" + "_" + idPlayer + "_" + (parseInt(count_p)+1));
     champElmt.setAttribute("data-champ", champion.id);
+    
+    // save champ powerstats
+    champElmt.dataset.powerstatsCombat       = champion.powerstats.combat
+    champElmt.dataset.powerstatsDurability   = champion.powerstats.durability
+    champElmt.dataset.powerstatsIntelligence = champion.powerstats.intelligence
+    champElmt.dataset.powerstatsPower        = champion.powerstats.power
+    champElmt.dataset.powerstatsSpeed        = champion.powerstats.speed
+    champElmt.dataset.powerstatsStrength     = champion.powerstats.strength
+
     var image = document.createElement("img");
     image.src = champion.image.url;
     image.width = "100";
@@ -164,7 +174,9 @@ function removeChamp(playerId, imageId) {
     state.champSelected.splice(tmp,1);
 
     var buttonToEnable = document.querySelector("#li"+championId);
-    buttonToEnable.style.display = "inline";
+    if (buttonToEnable != null){
+        buttonToEnable.style.display = "inline";
+    }
 
     cardToDel.remove();
 
@@ -207,3 +219,84 @@ searchButton.addEventListener('click', function () {
     clearChampList();
     research(heroName);
 });
+
+
+document.getElementById("fightButton").addEventListener('click', function () {
+
+    $('#fight-modal').modal()
+    resetStats(1)
+    resetStats(2)
+    cardList1 = document.querySelector("#list-p1").children
+    cardList2 = document.querySelector("#list-p2").children
+    createStats(cardList1, 1)
+    createStats(cardList2, 2)
+    showWinner()
+    
+});
+
+function resetStats(playerId){
+    Array.from(document.querySelector("#stats-j" + playerId).children).forEach(
+        function(bar, index, array) {
+            bar.remove()
+        }
+    );
+}
+function showWinner(){
+    console.log("Total p1: " + getTotalStats(1))
+    console.log("Total p2: " + getTotalStats(2))
+    getTotalStats(1) > getTotalStats(2) ? winner(1) : winner(2)
+}
+function winner(playerId){
+    document.querySelector("#winner").textContent = "Le joeur " + playerId + " gagne !"
+}
+function getTotalStats(playerId){
+    total = 0
+    Array.from(document.querySelector("#stats-j" + playerId).children).forEach(
+        function(bar, index, array) {
+            total += parseInt(bar.querySelector(".progress-bar").dataset.value)
+        }
+    );
+    return total
+}
+function createStats(cardList, playerId){
+    durability=0
+    combat=0
+    intelligence = 0
+    power=0
+    speed=0
+    strength=0
+
+        Array.from(cardList).forEach(
+            function(card, index, array) {
+                console.log(card)
+                durability +=    parseInt(card.dataset.powerstatsCombat) ? parseInt(card.dataset.powerstatsCombat) : 0
+                combat +=        parseInt(card.dataset.powerstatsDurability) ? parseInt(card.dataset.powerstatsDurability) : 0
+                intelligence +=  parseInt(card.dataset.powerstatsIntelligence) ? parseInt(card.dataset.powerstatsIntelligence) : 0
+                power +=         parseInt(card.dataset.powerstatsPower) ? parseInt(card.dataset.powerstatsPower) : 0
+                speed +=         parseInt(card.dataset.powerstatsSpeed) ? parseInt(card.dataset.powerstatsSpeed) : 0
+                strength +=      parseInt(card.dataset.powerstatsStrength) ? parseInt(card.dataset.powerstatsStrength) : 0
+            }
+        );
+
+    document.querySelector("#stats-j" + playerId).appendChild(createProgressBar("durability", durability/3))
+    document.querySelector("#stats-j" + playerId).appendChild(createProgressBar("combat", combat/3))
+    document.querySelector("#stats-j" + playerId).appendChild(createProgressBar("power", power/3))
+    document.querySelector("#stats-j" + playerId).appendChild(createProgressBar("speed", speed/3))
+    document.querySelector("#stats-j" + playerId).appendChild(createProgressBar("strength", strength/3))
+}
+
+function createProgressBar(statName, value){
+    var parent = document.createElement("div");
+    var p = document.createElement("div");
+    p.classList.add("progress")
+    var pBar = document.createElement("div");
+    pBar.classList.add("progress-bar")
+    pBar.classList.add("progress-bar-striped")
+    pBar.classList.add("progress-bar-animated")
+    pBar.style.width = value + "%"
+    pBar.dataset.value = value
+    p.appendChild(pBar)
+    parent.appendChild(document.createTextNode(statName))
+    parent.appendChild(p)
+    return parent
+}
